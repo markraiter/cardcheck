@@ -20,8 +20,8 @@ func (s Server) initRoutes(app *fiber.App, handler *handler.Handler, cfg *config
 
 	app.Get(apiPrefix+"/health", timeout.NewWithContext(handler.APIHealth, cfg.Server.AppReadTimeout))
 
-	// api := app.Group(apiPrefix)
-	// {
-
-	// }
+	api := app.Group(apiPrefix)
+	{
+		api.Post("/check", timeout.NewWithContext(handler.CheckCard.Validate, cfg.Server.AppWriteTimeout))
+	}
 }

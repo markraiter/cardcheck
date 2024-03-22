@@ -9,7 +9,6 @@ import (
 
 type Config struct {
 	Server Server
-	DB     Mongo
 }
 
 type Server struct {
@@ -17,13 +16,6 @@ type Server struct {
 	AppReadTimeout  time.Duration `env:"APP_READ_TIMEOUT" env-default:"60s"`
 	AppWriteTimeout time.Duration `env:"APP_WRITE_TIMEOUT" env-default:"60s"`
 	AppIdleTimeout  time.Duration `env:"APP_IDLE_TIMEOUT" env-default:"60s"`
-}
-
-type Mongo struct {
-	ConnectionString string `env:"MONGO_CONNECTION_STRING" env-required:"true"`
-	NameDB           string `env:"MONGO_DB" env-required:"true"`
-	Username         string `env:"MONGO_USERNAME" env-required:"true"`
-	Password         string `env:"MONGO_PASSWORD" env-required:"true"`
 }
 
 // MustLoad returns Config in case no error

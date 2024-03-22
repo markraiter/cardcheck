@@ -13,28 +13,14 @@ tasks:
     cmds:
       - go test ./...
 
-  coverage:
-    cmds:
-      - go test ./... -coverprofile=coverage.out
-      - go tool cover -html=coverage.out -o coverage.html
-      - xdg-open ./coverage.html
-
   swaginit:
     cmds:
       - swag init --outputTypes go,yaml -g cmd/main.go internal/models
-
-  mongo-up:
-    cmds:
-      - docker compose -f mongo.yaml up -d
-
-  mongo-down:
-    cmds:
-      - docker compose -f mongo.yaml down
 
   deploy:
     cmds:
       - git stash
       - git pull
-      - docker compose -f prod.yaml build
-      - docker compose -f prod.yaml down
-      - docker compose -f prod.yaml up -d
+      - docker compose build
+      - docker compose down
+      - docker compose up -d

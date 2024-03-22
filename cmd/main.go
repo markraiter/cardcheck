@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"log/slog"
 	"os"
 	"os/signal"
@@ -11,7 +10,6 @@ import (
 	"github.com/markraiter/cardcheck/internal/app/api"
 	"github.com/markraiter/cardcheck/internal/app/api/handler"
 	"github.com/markraiter/cardcheck/internal/app/service"
-	"github.com/markraiter/cardcheck/internal/app/storage/mongodb"
 	"github.com/markraiter/cardcheck/internal/config"
 )
 
@@ -34,12 +32,7 @@ func main() {
 	log.Info("Starting application...")
 	log.Info("port: " + cfg.Server.AppAddress)
 
-	storage, err := mongodb.New(context.Background(), cfg.DB)
-	if err != nil {
-		panic(err)
-	}
-
-	service := service.New(storage, log)
+	service := service.New(log)
 
 	handler := handler.New(service, log)
 

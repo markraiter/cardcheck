@@ -4,8 +4,12 @@ import "log/slog"
 
 type StorageInterface interface{}
 
-type Services struct{}
+type Services struct {
+	CardCheck
+}
 
-func New(storage StorageInterface, log *slog.Logger) *Services {
-	return &Services{}
+func New(log *slog.Logger) *Services {
+	return &Services{
+		CardCheck{log: log},
+	}
 }

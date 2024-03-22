@@ -10,6 +10,6 @@ type ResponseW struct {
 }
 
 type Error struct {
-	Code    int    `json:"code" example:"001"`
+	Code    string `json:"code" example:"001"`
 	Message string `json:"message" example:"error message"`
 }

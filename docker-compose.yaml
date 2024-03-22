@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  bad-test:
+    build: .
+    container_name: checkcard
+    restart: unless-stopped
+    ports:
+      - 8888:8888
+    networks:
+      - localnet 
+
+networks:
+  localnet:
+    external: true
+    name: localnet
