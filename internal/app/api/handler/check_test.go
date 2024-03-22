@@ -33,7 +33,7 @@ func Test_CheckCard_Validate(t *testing.T) {
 				ExpirationYear:  "2024",
 			},
 			expectedStatus: fiber.StatusOK,
-			expectedBody:   `{"valid":true,"error":{"code":"","message":""}}`,
+			expectedBody:   `{"valid":true,"error":{"code":"001","message":"card is valid"}}`,
 		},
 		{
 			name: "no card number",
@@ -107,7 +107,13 @@ type mockValidator struct {
 
 func (v mockValidator) Validate(card *model.Card) (*model.ResponseW, error) {
 	if card.CardNumber == v.card.CardNumber {
-		return &model.ResponseW{Valid: true}, nil
+		return &model.ResponseW{
+			Valid: true,
+			Error: model.Error{
+				Code:    "001",
+				Message: "card is valid",
+			},
+		}, nil
 	}
 
 	return nil, errors.New("Invalid card number")
