@@ -94,7 +94,7 @@ func isValidCardNumber(cardNumber string) bool {
 func isValidExpirationDate(expirationMonth, expirationYear int) bool {
 	currentYear, currentMonth, _ := time.Now().Date()
 
-	if expirationYear < int(currentYear) || expirationYear == int(currentYear) && expirationMonth < int(currentMonth) {
+	if expirationYear < int(currentYear) || expirationYear == int(currentYear) && expirationMonth < int(currentMonth) || expirationMonth > 12 {
 		return false
 	}
 
