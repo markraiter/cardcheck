@@ -1,16 +1,9 @@
 version: '3.9'
 
 services:
-  bad-test:
+  cardchecker:
     build: .
-    container_name: checkcard
+    container_name: cardchecker
     restart: unless-stopped
     ports:
       - 8888:8888
-    networks:
-      - localnet 
-
-networks:
-  localnet:
-    external: true
-    name: localnet
