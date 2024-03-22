@@ -1,0 +1,32 @@
+basePath: /api
+definitions:
+  model.Response:
+    properties:
+      message:
+        example: response message
+        type: string
+    type: object
+info:
+  contact:
+    email: raitermark@proton.me
+    name: Mark Raiter
+  description: This is an API for validating credit cards.
+  title: Cardcheck API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      consumes:
+      - '*/*'
+      description: Ping health of API for Docker.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Shows the status of server.
+      tags:
+      - Health
+swagger: "2.0"

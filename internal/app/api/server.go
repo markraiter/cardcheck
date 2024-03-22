@@ -8,18 +8,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/markraiter/cardcheck/config"
+	"github.com/markraiter/cardcheck/internal/app/api/handler"
+	"github.com/markraiter/cardcheck/internal/config"
+	"github.com/markraiter/cardcheck/internal/model"
 )
 
 const (
-	bodyLimit = 100 * 1024 * 1024 // 100 MB RESTRICION
+	bodyLimit = 10 * 1024 * 1024 // 10 MB RESTRICION
 )
 
 type Server struct {
 	HTTPServer *fiber.App
 }
 
-// New returns new instance of the Server.
 func New(cfg *config.Config, handler *handler.Handler) *Server {
 	server := new(Server)
 
@@ -57,7 +58,7 @@ func New(cfg *config.Config, handler *handler.Handler) *Server {
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {
-	const op = "api.Server.Shutdown"
+	const operation = "api.Server.Shutdown"
 
-	return fmt.Errorf("%s: %w", op, s.HTTPServer.ShutdownWithContext(ctx))
+	return fmt.Errorf("%s: %w", operation, s.HTTPServer.ShutdownWithContext(ctx))
 }
