@@ -7,6 +7,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/go-playground/validator"
 	"github.com/markraiter/cardcheck/internal/app/api"
 	"github.com/markraiter/cardcheck/internal/app/api/handler"
 	"github.com/markraiter/cardcheck/internal/app/service"
@@ -22,7 +23,7 @@ const (
 // @description	This is an API for validating credit cards.
 // @contact.name Mark Raiter
 // @contact.email raitermark@proton.me
-// host localhost:5555
+// @host localhost:8888
 // @BasePath /api
 func main() {
 	cfg := config.MustLoad()
@@ -32,9 +33,11 @@ func main() {
 	log.Info("Starting application...")
 	log.Info("port: " + cfg.Server.AppAddress)
 
+	validate := validator.New()
+
 	service := service.New(log)
 
-	handler := handler.New(service, log)
+	handler := handler.New(service, validate, log)
 
 	server := api.New(cfg, handler)
 

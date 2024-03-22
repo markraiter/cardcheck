@@ -11,9 +11,6 @@ definitions:
       expiration_year:
         example: "2028"
         type: string
-      id:
-        example: ""
-        type: string
     required:
     - card_number
     - expiration_month
@@ -42,6 +39,7 @@ definitions:
         example: true
         type: boolean
     type: object
+host: localhost:8888
 info:
   contact:
     email: raitermark@proton.me

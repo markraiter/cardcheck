@@ -3,6 +3,7 @@ package handler
 import (
 	"log/slog"
 
+	"github.com/go-playground/validator"
 	"github.com/gofiber/fiber/v2"
 	"github.com/markraiter/cardcheck/internal/model"
 )
@@ -12,8 +13,9 @@ type Validator interface {
 }
 
 type CheckCard struct {
-	log       *slog.Logger
-	validator Validator
+	log          *slog.Logger
+	validator    Validator
+	reqValidator *validator.Validate
 }
 
 // @Summary Validate card
@@ -35,6 +37,12 @@ func (cc *CheckCard) Validate(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&card); err != nil {
 		log.Error("error parsing request body", model.Err(err))
+
+		return c.Status(fiber.StatusBadRequest).JSON(model.ResponseMessage{Message: err.Error()})
+	}
+
+	if err := cc.reqValidator.Struct(card); err != nil {
+		log.Error("error validating request body", model.Err(err))
 
 		return c.Status(fiber.StatusBadRequest).JSON(model.ResponseMessage{Message: err.Error()})
 	}

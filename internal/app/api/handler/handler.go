@@ -2,6 +2,8 @@ package handler
 
 import (
 	"log/slog"
+
+	"github.com/go-playground/validator"
 )
 
 type ServiceInterface interface {
@@ -13,9 +15,9 @@ type Handler struct {
 	CheckCard
 }
 
-func New(services ServiceInterface, log *slog.Logger) *Handler {
+func New(services ServiceInterface, reqValidator *validator.Validate, log *slog.Logger) *Handler {
 	return &Handler{
 		HealthCheck{log: log},
-		CheckCard{log: log, validator: services},
+		CheckCard{log: log, validator: services, reqValidator: reqValidator},
 	}
 }
