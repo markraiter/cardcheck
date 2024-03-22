@@ -39,7 +39,7 @@ func New(cfg *config.Config, handler *handler.Handler) *Server {
 
 			c.Status(code)
 
-			if err := c.JSON(model.Response{Message: localError.Message}); err != nil {
+			if err := c.JSON(model.ResponseMessage{Message: localError.Message}); err != nil {
 				return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 			}
 

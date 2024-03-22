@@ -21,5 +21,5 @@ type HealthCheck struct {
 // @Success	200	{object} model.Response
 // @Router /health [get].
 func (hc *HealthCheck) APIHealth(c *fiber.Ctx) error {
-	return c.Status(http.StatusOK).JSON(model.Response{Message: "healthy"})
+	return c.Status(http.StatusOK).JSON(model.ResponseMessage{Message: "healthy"})
 }
