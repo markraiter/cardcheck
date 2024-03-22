@@ -15,7 +15,7 @@ tasks:
 
   swaginit:
     cmds:
-      - swag init --outputTypes go,yaml -g cmd/main.go internal/models
+      - swag init --outputTypes go,yaml -g cmd/main.go internal/model
 
   run-container:
     cmds:

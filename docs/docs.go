@@ -18,6 +18,52 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/check": {
+            "post": {
+                "description": "Validate card - check if card number is valid and expiration date is not in the past",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "check"
+                ],
+                "summary": "Validate card",
+                "parameters": [
+                    {
+                        "description": "Card to validate",
+                        "name": "card",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Card"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseW"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseMessage"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseMessage"
+                        }
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
                 "description": "Ping health of API for Docker.",
@@ -35,7 +81,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Response"
+                            "$ref": "#/definitions/model.ResponseMessage"
                         }
                     }
                 }
@@ -43,12 +89,63 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "model.Response": {
+        "model.Card": {
+            "type": "object",
+            "required": [
+                "card_number",
+                "expiration_month",
+                "expiration_year"
+            ],
+            "properties": {
+                "card_number": {
+                    "type": "string",
+                    "example": "1234567890123456"
+                },
+                "expiration_month": {
+                    "type": "string",
+                    "example": "12"
+                },
+                "expiration_year": {
+                    "type": "string",
+                    "example": "2028"
+                },
+                "id": {
+                    "type": "string",
+                    "example": ""
+                }
+            }
+        },
+        "model.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "001"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "error message"
+                }
+            }
+        },
+        "model.ResponseMessage": {
             "type": "object",
             "properties": {
                 "message": {
                     "type": "string",
                     "example": "response message"
+                }
+            }
+        },
+        "model.ResponseW": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/model.Error"
+                },
+                "valid": {
+                    "type": "boolean",
+                    "example": true
                 }
             }
         }

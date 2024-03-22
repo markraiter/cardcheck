@@ -1,10 +1,46 @@
 basePath: /api
 definitions:
-  model.Response:
+  model.Card:
+    properties:
+      card_number:
+        example: "1234567890123456"
+        type: string
+      expiration_month:
+        example: "12"
+        type: string
+      expiration_year:
+        example: "2028"
+        type: string
+      id:
+        example: ""
+        type: string
+    required:
+    - card_number
+    - expiration_month
+    - expiration_year
+    type: object
+  model.Error:
+    properties:
+      code:
+        example: "001"
+        type: string
+      message:
+        example: error message
+        type: string
+    type: object
+  model.ResponseMessage:
     properties:
       message:
         example: response message
         type: string
+    type: object
+  model.ResponseW:
+    properties:
+      error:
+        $ref: '#/definitions/model.Error'
+      valid:
+        example: true
+        type: boolean
     type: object
 info:
   contact:
@@ -14,6 +50,37 @@ info:
   title: Cardcheck API
   version: "1.0"
 paths:
+  /check:
+    post:
+      consumes:
+      - application/json
+      description: Validate card - check if card number is valid and expiration date
+        is not in the past
+      parameters:
+      - description: Card to validate
+        in: body
+        name: card
+        required: true
+        schema:
+          $ref: '#/definitions/model.Card'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseW'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ResponseMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ResponseMessage'
+      summary: Validate card
+      tags:
+      - check
   /health:
     get:
       consumes:
@@ -25,7 +92,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Response'
+            $ref: '#/definitions/model.ResponseMessage'
       summary: Shows the status of server.
       tags:
       - Health
