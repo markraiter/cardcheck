@@ -17,7 +17,7 @@ tasks:
     cmds:
       - swag init --outputTypes go,yaml -g cmd/main.go internal/models
 
-  deploy:
+  run-container:
     cmds:
       - git stash
       - git pull
