@@ -37,6 +37,15 @@ func Test_Validate(t *testing.T) {
 			errorCode: "002",
 		},
 		{
+			name: "invalid card number 2",
+			card: &model.Card{
+				CardNumber:      "5457626723237072",
+				ExpirationMonth: "12",
+				ExpirationYear:  "2024",
+			},
+			errorCode: "002",
+		},
+		{
 			name: "invalid expiration month",
 			card: &model.Card{
 				CardNumber:      "5167803252097675",
