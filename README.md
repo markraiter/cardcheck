@@ -19,7 +19,8 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Clone the repository
 2. Install the dependencies with `go mod download`
-3. Run the server with `task run`
+3. Follow the instructions to install [Taskfile](https://taskfile.dev/ru-ru/installation/) utility
+4. Run the server with `task run`
 
 ## Running the tests
 
