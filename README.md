@@ -2,6 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/markraiter/cardcheck)](https://goreportcard.com/report/github.com/markraiter/cardcheck)
 
+
 This is an API for validating credit cards.
 
 ## Getting Started
@@ -19,8 +20,9 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Clone the repository
 2. Install the dependencies with `go mod download`
-3. Follow the instructions to install [Taskfile](https://taskfile.dev/ru-ru/installation/) utility
-4. Run the server with `task run`
+3. Create `.env` file and copy values from `.env_example`
+4. Follow the instructions to install [Taskfile](https://taskfile.dev/ru-ru/installation/) utility
+5. Run the server with `task run`
 
 ## Running the tests
 
