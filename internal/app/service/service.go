@@ -2,8 +2,6 @@ package service
 
 import "log/slog"
 
-type StorageInterface interface{}
-
 type Services struct {
 	CardCheck
 }

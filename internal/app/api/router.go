@@ -10,8 +10,6 @@ import (
 
 const (
 	apiPrefix = "/api"
-	auth      = "/auth"
-	report    = "/report"
 )
 
 func (s Server) initRoutes(app *fiber.App, handler *handler.Handler, cfg *config.Config) {

@@ -12,7 +12,7 @@ type Config struct {
 }
 
 type Server struct {
-	AppAddress      string        `env:"APP_PORT" env-default:"5000"`
+	AppAddress      string        `env:"APP_PORT" env-default:"8888"`
 	AppReadTimeout  time.Duration `env:"APP_READ_TIMEOUT" env-default:"60s"`
 	AppWriteTimeout time.Duration `env:"APP_WRITE_TIMEOUT" env-default:"60s"`
 	AppIdleTimeout  time.Duration `env:"APP_IDLE_TIMEOUT" env-default:"60s"`

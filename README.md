@@ -26,8 +26,8 @@ A step by step series of examples that tell you how to get a development environ
 
 ## Running the tests
 
-Run the tests with `task test`
-Or you can proceed with the [OpenAPI](https://swagger.io/) docs by link `localhost:8888/swagger`
+1. Run the tests with `task test`
+2. Also you can proceed with the [OpenAPI](https://swagger.io/) docs by link `localhost:8888/swagger`
 
 ## Deployment
 

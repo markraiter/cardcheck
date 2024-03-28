@@ -13,10 +13,6 @@ import (
 	"github.com/markraiter/cardcheck/internal/model"
 )
 
-const (
-	bodyLimit = 10 * 1024 * 1024 // 10 MB RESTRICION
-)
-
 type Server struct {
 	HTTPServer *fiber.App
 }
@@ -28,7 +24,6 @@ func New(cfg *config.Config, handler *handler.Handler) *Server {
 		ReadTimeout:  cfg.Server.AppReadTimeout,
 		WriteTimeout: cfg.Server.AppWriteTimeout,
 		IdleTimeout:  cfg.Server.AppIdleTimeout,
-		BodyLimit:    bodyLimit,
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
 
